@@ -30,7 +30,6 @@ import org.eclipse.jetty.client.HttpConversation;
 import org.eclipse.jetty.client.HttpRequest;
 import org.eclipse.jetty.client.ProtocolHandler;
 import org.eclipse.jetty.client.api.Request;
-import org.eclipse.jetty.client.http.HttpClientTransportOverHTTP;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 import static java.util.Optional.ofNullable;
@@ -64,7 +63,7 @@ public class SalesforceHttpClient extends HttpClient {
     }
 
     public SalesforceHttpClient(HttpClientTransport transport, SslContextFactory sslContextFactory) {
-        super(ofNullable(transport).orElse(new HttpClientTransportOverHTTP()), sslContextFactory);
+        super(ofNullable(transport).orElse(new SalesforceHttpClientTransportOverHTTP()), sslContextFactory);
 
         // Jetty 9.3, as opposed to 9.2 the way to add ProtocolHandler to
         // HttpClient changed in 9.2 HttpClient::getProtocolHandlers returned
